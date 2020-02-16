@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      const pos = document.getElementById("pos");
+      pos.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+    }
+    </script>
+  </head>
+  <body>
+    <button onclick="getLocation()" id="try">現在位置を表示</button>
+    <p id="pos"></p>
+  </body>
+</html>
