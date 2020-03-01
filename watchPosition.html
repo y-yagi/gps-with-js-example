@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+    function start() {
+      if (navigator.geolocation) {
+        const id = navigator.geolocation.watchPosition(showPosition, error, { enableHighAccuracy: true });
+        document.getElementById("start").disabled = true;
+        document.getElementById("stop").dataset.watchId = id;
+        document.getElementById("stop").disabled = false;
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      const pos = document.getElementById("pos");
+      pos.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+    }
+
+    function error(err) {
+      console.warn(`Error: (${err.code}): ${err.message}`);
+    }
+
+    function stop() {
+      const id = document.getElementById("stop").dataset.watchId;
+      navigator.geolocation.clearWatch(id)
+      document.getElementById("stop").disabled = true;
+      document.getElementById("start").disabled = false;
+    }
+    </script>
+  </head>
+  <body>
+    <button onclick="start()" id="start">開始</button>
+    <button onclick="stop()" id="stop" disabled>停止</button>
+    <p id="pos"></p>
+  </body>
+</html>
