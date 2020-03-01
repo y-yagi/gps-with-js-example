@@ -4,7 +4,7 @@
     <script>
     function getLocation() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, getCurrentPositionError, { enableHighAccuracy: true });
+        navigator.geolocation.getCurrentPosition(showPosition, error, { enableHighAccuracy: true });
       } else {
         alert("Geolocation is not supported by this browser.");
       }
@@ -15,13 +15,13 @@
       pos.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
     }
 
-    function getCurrentPositionError(err) {
+    function error(err) {
       console.warn(`Error: (${err.code}): ${err.message}`);
     }
     </script>
   </head>
   <body>
-    <button onclick="getLocation()" id="try">現在位置を表示</button>
+    <button onclick="getLocation()">現在位置を表示</button>
     <p id="pos"></p>
   </body>
 </html>
